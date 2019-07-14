@@ -35,10 +35,6 @@ public class VascheArrayListImpl implements AcquarioInterface {
 		vasche.remove(id);
 	}
 
-	@Override
-	public void setEsemplariToVasca(int pos, List<Esemplare> esemplari) {
-		vasche.get(pos).setEsemplari(esemplari);
-	}
 
 	public void removeEsemplareByNominativo(int vascaId, String writtenScelta) {
 		int i=-1;

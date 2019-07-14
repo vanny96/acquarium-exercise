@@ -1,12 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
-
 import model.Esemplare;
 import model.Mammifero;
 import model.Pesce;
 import model.Vasca;
-import repository.EsemplariArrayListImpl;
 import repository.VascheArrayListImpl;
 import view.Vista;
 
@@ -16,8 +13,6 @@ public class AcquarioManager {
 		Vista v = new Vista();
 		VascheArrayListImpl vasche = new VascheArrayListImpl();
 		
-		EsemplariArrayListImpl tempEseplari = new EsemplariArrayListImpl();
-
 		Esemplare newEsemplare = null;
 
 		int scelta = -1;
@@ -80,19 +75,14 @@ public class AcquarioManager {
 				
 				
 				//Aggiungo al tempEsemplari
-				tempEseplari.add(newEsemplare);
+				
+				vasche.getById(vascaId).getEsemplari().add(newEsemplare);
+
 				
 				writtenScelta = v.leggiString("Aggiungere altri esemplari alla vasca? (y per continuare) ");
 				}while(writtenScelta.equalsIgnoreCase("y"));
 				
-				// Aggiungo gli esemplari alla vasca corretta
-				for(Esemplare esemplare : vasche.getById(vascaId).getEsemplari()){
-					tempEseplari.add(esemplare);
-				}
-				
-				vasche.setEsemplariToVasca(vascaId, new ArrayList<>(tempEseplari.getAll()));
 			
-				tempEseplari.clearList();
 				break;
 				
 			// Stampa delle vasche
@@ -143,7 +133,7 @@ public class AcquarioManager {
 				//Rimozione dell'esemplare
 				vasche.removeEsemplareByNominativo(vascaId, writtenScelta);
 				} else {
-					v.stampaMessaggio("La vasca è vuota.");
+					v.stampaMessaggio("La vasca ï¿½ vuota.");
 				}
 				
 				break;
